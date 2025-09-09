@@ -118,6 +118,8 @@ Open the Frontend:
 
 * Just open `index.html` in your browser.
 
+---
+
 🎉 You’re ready to craft prompts like a pro with **PromptCraft**.
 
 ---
