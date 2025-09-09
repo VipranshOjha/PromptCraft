@@ -53,7 +53,6 @@ Now, apply this structured and stylistic approach to the user's idea.
 **User Idea:** "{idea}"
 """
 
-# --- API Endpoint (Unchanged) ---
 @app.route('/generate_prompt', methods=['POST'])
 def handle_generation():
     try:
@@ -74,7 +73,7 @@ def handle_generation():
         print(f"An error occurred: {e}")
         return jsonify({"error": "An internal server error occurred"}), 500
 
-# --- Server Start (Unchanged) ---
 if __name__ == '__main__':
 
     app.run(debug=True)
+
