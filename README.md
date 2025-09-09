@@ -122,4 +122,3 @@ Open the Frontend:
 
 🎉 You’re ready to craft prompts like a pro with **PromptCraft**.
 
----
