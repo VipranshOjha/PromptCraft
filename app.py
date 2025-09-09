@@ -1,12 +1,9 @@
-# app.py - V5 - The Storyteller Expert
-
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import google.generativeai as genai
 import os
 from dotenv import load_dotenv
 
-# --- Configuration (unchanged) ---
 load_dotenv()
 api_key = os.getenv("GEMINI_API_KEY")
 if not api_key:
@@ -14,11 +11,9 @@ if not api_key:
 genai.configure(api_key=api_key)
 model = genai.GenerativeModel('gemini-1.5-flash')
 
-# --- Flask App Setup (unchanged) ---
 app = Flask(__name__)
 CORS(app)
 
-# --- V5 UPGRADE: Rules now include stylistic persona/ultimatum instructions ---
 PROMPT_RULES = {
     "coding": {
         "concise": "1. **Objective:**\n2. **Core Requirements:**",
@@ -30,7 +25,6 @@ PROMPT_RULES = {
         "standard": "1. **Core Task:**\n2. **Key Elements:**\n3. **Tone & Style:**\n4. **Audience:**",
         "expert": "1. **Core Task:**\n2. **Key Elements:**\n3. **Tone & Style:**\n4. **Literary Devices:**\n5. **Audience:**\n6. **Forbidden Tropes:**"
     },
-    # Fallback rules for other modes
     "academic": {"standard": "1. **Thesis Statement:**\n2. **Outline:**\n3. **Key Sources:**\n4. **Required Tone:**"},
     "ppt": {"standard": "1. **Audience & Goal:**\n2. **Slide Outline:**\n3. **Key Visuals:**\n4. **Tone & Style:"},
     "research": {"standard": "1. **Research Question:**\n2. **Methodology:**\n3. **Scope:**\n4. **Keywords:"},
@@ -38,15 +32,12 @@ PROMPT_RULES = {
 }
 
 def create_meta_prompt(idea, target, detail):
-    # This logic now handles fallbacks much more gracefully.
     target_rules = PROMPT_RULES.get(target, PROMPT_RULES["image"])
     rules = target_rules.get(detail, target_rules.get("standard"))
 
     persona = "Your role is an AI Prompt Engineering Expert."
     goal = f"Your goal is to transform a user's idea into a highly detailed and structured project brief for a specialized AI assistant. The target mode is '{target}' and the required detail level is '{detail}'."
 
-    # --- THIS IS THE KEY CHANGE ---
-    # We've added two new master rules for style.
     return f"""{persona} {goal}
 
 You must generate a response that is a structured brief. Follow these overall style rules:
@@ -85,4 +76,5 @@ def handle_generation():
 
 # --- Server Start (Unchanged) ---
 if __name__ == '__main__':
+
     app.run(debug=True)
