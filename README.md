@@ -10,8 +10,11 @@ When I used AI assistants like Gemini, ChatGPT, or Claude, I often had ideas in 
 * Online “prompt generators” I found were either too basic or locked behind premium paywalls.
 
 I needed a tool that could:
+
 ✅ Transform vague ideas into **structured expert prompts**
+
 ✅ Work across multiple **domains** (coding, writing, academic, research, image gen, etc.)
+
 ✅ Be free, local, and customizable
 
 ---
