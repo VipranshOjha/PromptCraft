@@ -220,7 +220,7 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            align-self: flex-end; /* This will move it to the right */
+            align-self: flex-end;
             margin-top: 10px;
         }
 
@@ -471,7 +471,6 @@
             background: #ef4444;
         }
 
-        /* --- NEW CSS FOR BUTTONS --- */
         .button-group {
             display: flex;
             flex-wrap: wrap;
@@ -636,11 +635,9 @@
 
         let isProcessing = false;
 
-        // NEW: State variables to hold the current selection
-        let currentTarget = 'image'; // Default active value
-        let currentDetail = 'standard'; // Default active value
+]        let currentTarget = 'text'; 
+        let currentDetail = 'standard';
 
-        // NEW: Function to handle button group logic
         function setupButtonGroup(containerId, stateUpdater) {
             const container = document.getElementById(containerId);
             const buttons = container.querySelectorAll('.mode-btn');
@@ -655,13 +652,10 @@
             });
         }
 
-        // REPLACE the old init() function
         function init() {
-            // Setup the button groups
             setupButtonGroup('targetSelector', (value) => currentTarget = value);
             setupButtonGroup('detailSelector', (value) => currentDetail = value);
 
-            // Setup other event listeners
             generateBtn.addEventListener('click', handleGenerateClick);
             copyBtn.addEventListener('click', copyToClipboard);
             userInput.addEventListener('input', adjustTextareaHeight);
@@ -679,17 +673,12 @@
             const idea = userInput.value.trim();
             const target = currentTarget;
             const detail = currentDetail;
-
-            // --- ADD THIS BLOCK ---
-            // Map internal values to display-friendly text
             const detailTextMap = {
                 concise: 'Concise Prompt',
                 standard: 'Standard Prompt',
-                expert: 'Detailed Prompt' // Matches your new button text
+                expert: 'Detailed Prompt'
             };
-            // Update the output header text dynamically
             outputLabel.innerHTML = `🚀 Your ${detailTextMap[detail] || 'Expert-Level Prompt'}`;
-            // --- END OF BLOCK ---
 
             if (!idea) {
                 showToast("Please enter an idea first!", 'error');
@@ -775,4 +764,5 @@
         init();
     </script>
 </body>
+
 </html>
